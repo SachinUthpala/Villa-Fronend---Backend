@@ -9,6 +9,40 @@
         Whatsapp -
     ->    
 -->
+<?php
+//db connection
+require_once '../db.configs/connection.db.php';
+//sesstion Start
+session_start();
+
+  // Turn off all error reporting
+  error_reporting(0);
+
+
+
+?>
+
+
+<!--
+  -cheacking the person is admin or normal user-
+-->
+<?php
+  $isAdmin = false;
+  if(isset($_SESSION['userMail'])){
+    $email = $_SESSION['userMail'];
+    $adminQuery = "SELECT * FROM users WHERE email = '$email'";
+    $adminResult = $conn -> query($adminQuery);
+
+    if($adminResult -> num_rows > 0){
+      $adminRow = $adminResult -> fetch_assoc();
+      $name = $adminRow['name'];
+      $CheackAdmin = $adminRow['isAdmin'];
+      if($CheackAdmin == 1){
+        $isAdmin = true;
+      }
+    }
+  }
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,6 +67,10 @@
         preload images
     -->
     <link rel="preload" as="image" href="../assets/images/preloader.svg" />
+
+    <!--fonts icons-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  
 </head>
 
 <body>
@@ -54,39 +92,54 @@
             </a>
 
             <nav class="navbar" data-navbar>
-                <!--navbaar top-->
-                <div class="navbar-top">
-                    <a href="#" class="logo">
-                        <img src="../assets/images/logo.png" alt="logo" width="187" height="38" />
-                    </a>
+          <!--navbaar top-->
+          <div class="navbar-top">
+            <a href="#" class="logo">
+              <img
+                src="./assets/images/logo.png"
+                alt="logo"
+                width="187"
+                height="38"
+              />
+            </a>
 
-                    <button class="nav-toggle-btn" aria-label="close menu" data-nav-toggler onclick="closeMenu()">
-                        <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
-                    </button>
-                </div>
-                <!--menu icons-->
-                <ul class="navbar-list">
-                    <li class="navbar-item">
-                        <a href="../index.html" class="navbar-link ">Home</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a href="../Rooms/Room.html" class="navbar-link">Rooms</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a href="../Gallary/Gallary.html" class="navbar-link">Gallary</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a href="../About/About.html" class="navbar-link ">About</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a href="#" class="navbar-link active">Contact</a>
-                    </li>
-                </ul>
-                <!--header action-->
-                <div class="header-action">
-                    <a href="../Registration/Registration.html" class="btn btn-primary">LogIn</a>
-                </div>
-            </nav>
+            <button
+              class="nav-toggle-btn"
+              aria-label="close menu"
+              data-nav-toggler
+              onclick="closeMenu()"
+            >
+              <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+            </button>
+          </div>
+          <!--menu icons-->
+          <ul class="navbar-list">
+            <li class="navbar-item">
+              <a href="../index.php" class="navbar-link ">Home</a>
+            </li>
+            <li class="navbar-item">
+              <a href="./Rooms/Room.php" class="navbar-link">Rooms</a>
+            </li>
+            <li class="navbar-item">
+              <a href="./Gallary/Gallary.php" class="navbar-link">Gallary</a>
+            </li>
+            <li class="navbar-item">
+              <a href="./About/About.php" class="navbar-link">About</a>
+            </li>
+            <li class="navbar-item">
+              <a href="#" class="navbar-link active">Contact</a>
+            </li>
+            <li class="navbar-item" style="display: <?php if($isAdmin == false){echo 'none';}else if($isAdmin == true) {echo 'block';} ?>;" onclick="openAdmin()" >
+              <a href="#" class="navbar-link" onlicik="openAdmin()">Admin</a>
+            </li>
+          </ul>
+          <!--header action-->
+          <div class="header-action" style="display:<?php if($_SESSION['userMail'] != null){ echo 'none';} else { echo 'block';} ?>;">
+            <a href="./Registration/Registration.php" class="btn btn-primary">LogIn</a>
+          </div>
+          <img src="../assets/images/k.jpg" width="50px" height="50px" style="border-radius: 100%;cursor:pointer;display: <?php if($_SESSION['userMail'] != null){ echo 'block';} else { echo 'none';} ?>;" alt="">
+          <span style="cursor: pointer;padding-left:20px;font-size:27px;display: <?php if($_SESSION['userMail'] != null){ echo 'block';} else { echo 'none';} ?>;" class="material-symbols-outlined" onclick="signout()">power_settings_new</span>
+        </nav>
 
             <button class="nav-toggle-btn" aria-label="open menu" onclick="openMenu()">
                 <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
@@ -151,22 +204,22 @@
                         <div class="image-box">
                             <img src="../assets/images/contact.png" alt="" />
                         </div>
-                        <form action="#">
+                        <form action="#" method="post">
                             <div class="topic">Send us a message</div>
                             <div class="input-box">
-                                <input type="text" required />
+                                <input type="text" required name="name" value="<?php if($email != null) {echo $name;} ?>" />
                                 <label>Enter your name</label>
                             </div>
                             <div class="input-box">
-                                <input type="text" required />
+                                <input type="text" required name="email" value="<?php if($email != null) {echo $email ; } ?>" />
                                 <label>Enter your email</label>
                             </div>
                             <div class="input-box">
-                                <input type="text" required />
+                                <input type="text" required name="mag"/>
                                 <label>Enter your Massage</label>
                             </div>
                             <div class="input-box">
-                                <input type="submit" value="Send Message" />
+                                <input type="submit" value="Send Message" name="massage" />
                             </div>
                         </form>
                     </div>
@@ -483,6 +536,50 @@
     <script src="../assets/js/script.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <!--
+      sweet alert
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+    <!--
+      scripts for sweet alert
+    -->
+    <script>
+      function openAdmin(){
+        Swal.fire({
+          title: "Are you sure?",
+          text: "Do you want to switch Admin Dashbord",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, Switch Now!"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            location.href="../Admin/Admin.html";
+          }
+        });
+      }
+
+      function signout(){
+        Swal.fire({
+          title: "Are you sure?",
+          text: "Do you want to Exsit",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, Logout Now!"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            location.href="../db.configs/SignOut/SignOut.php";
+          }
+        });
+      }
+    </script>
 </body>
 
 </html>
