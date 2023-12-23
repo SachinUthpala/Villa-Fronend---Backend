@@ -17,7 +17,8 @@
  session_start();
   // Turn off all error reporting
   error_reporting(0);
-
+//db
+require_once './db.configs/connection.db.php';
   
 ?>
 
@@ -25,6 +26,20 @@
   -cheacking the person is admin or normal user-
 -->
 <?php
+  $isAdmin = false;
+  if(isset($_SESSION['userMail'])){
+    $email = $_SESSION['userMail'];
+    $adminQuery = "SELECT * FROM users WHERE email = '$email'";
+    $adminResult = $conn -> query($adminQuery);
+
+    if($adminResult -> num_rows > 0){
+      $adminRow = $adminResult -> fetch_assoc();
+      $CheackAdmin = $adminRow['isAdmin'];
+      if($CheackAdmin == 1){
+        $isAdmin = true;
+      }
+    }
+  }
 ?>
 
 <!DOCTYPE html>
@@ -121,7 +136,7 @@
             <li class="navbar-item">
               <a href="./Contact/ContactUs.php" class="navbar-link">Contact</a>
             </li>
-            <li class="navbar-item" style="display: none;" onclick="openAdmin()" >
+            <li class="navbar-item" style="display: <?php if($isAdmin == false){echo 'none';}else if($isAdmin == true) {echo 'block';} ?>;" onclick="openAdmin()" >
               <a href="#" class="navbar-link" onlicik="openAdmin()">Admin</a>
             </li>
           </ul>
