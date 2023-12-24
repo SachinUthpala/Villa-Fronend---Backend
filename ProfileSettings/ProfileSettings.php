@@ -1,3 +1,10 @@
+<?php
+
+//db connection
+require_once '../db.configs/connection.db.php';
+
+?>
+
 <!DOCTYPE html>
 <!---Coding By CodingLab | www.codinglabweb.com--->
 <html lang="en">
@@ -42,7 +49,7 @@
           </div>
         </div>
         <button type="submit">Submit</button>
-        <button>Cancel</button>
+        <button onclick="location.href='../index.php'">Cancel</button>
       </form>
     </section>
   </body>

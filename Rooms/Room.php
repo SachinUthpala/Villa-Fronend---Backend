@@ -88,7 +88,7 @@
           <!--menu icons-->
           <ul class="navbar-list">
             <li class="navbar-item">
-              <a href="../index.html" class="navbar-link ">Home</a>
+              <a href="../index.php" class="navbar-link ">Home</a>
             </li>
             <li class="navbar-item">
               <a href="#" class="navbar-link active">Rooms</a>
@@ -97,15 +97,15 @@
               <a href="#" class="navbar-link">Services</a>
             </li>
             <li class="navbar-item">
-              <a href="../About/About.html" class="navbar-link">About</a>
+              <a href="../About/About.php" class="navbar-link">About</a>
             </li>
             <li class="navbar-item">
-              <a href="../Contact/ContactUs.html" class="navbar-link">Contact</a>
+              <a href="../Contact/ContactUs.php" class="navbar-link">Contact</a>
             </li>
           </ul>
           <!--header action-->
           <div class="header-action">
-            <a href="../Registration/Registration.html" class="btn btn-primary">LogIn</a>
+            <a href="../Registration/Registration.php" class="btn btn-primary">LogIn</a>
           </div>
         </nav>
 
@@ -205,7 +205,7 @@
                 </p>
                 <img src="../assets/images/room1.jpg" alt="" class="room-img">
                 <br>
-                <button class="room-btn" onclick="location.href='./Room1/Room1.html'">More Info</button>
+                <button class="room-btn" onclick="location.href='./Room1/Room1.php'">More Info</button>
 
                 
             </div>
@@ -226,7 +226,7 @@
                 </p>
                 <img src="../assets/images/room3.jpg"  alt="" class="room-img">
                 <br>
-                <button class="room-btn" onclick="location.href='./Room2/Room2.html'">More Info</button>
+                <button class="room-btn" onclick="location.href='./Room2/Room2.php'">More Info</button>
             
             
             </div>
@@ -248,7 +248,7 @@
                 <br>
                 <img src="../assets/images/room2.jpg"  alt="" class="room-img">
                 <br>
-                <button class="room-btn" onclick="location.href='./Room3/Room3.html'">More Info</button>
+                <button class="room-btn" onclick="location.href='./Room3/Room3.php'">More Info</button>
             
             
             </div>

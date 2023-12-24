@@ -10,6 +10,12 @@
     ->    
 -->
 
+<?php
+//db connection
+require_once '../../db.configs/connection.db.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,24 +73,24 @@
                 <!--menu icons-->
                 <ul class="navbar-list">
                     <li class="navbar-item">
-                        <a href="../../index.html" class="navbar-link ">Home</a>
+                        <a href="../../index.php" class="navbar-link ">Home</a>
                     </li>
                     <li class="navbar-item">
-                        <a href="../Room.html" class="navbar-link active" style="display:flex;">Rooms->Room02</a>
+                        <a href="../Room.php" class="navbar-link active" style="display:flex;">Rooms->Room02</a>
                     </li>
                     <li class="navbar-item">
-                        <a href="../../Gallary/Gallary.html" class="navbar-link">Gallary</a>
+                        <a href="../../Gallary/Gallary.php" class="navbar-link">Gallary</a>
                     </li>
                     <li class="navbar-item">
-                        <a href="../../About/About.html" class="navbar-link">About</a>
+                        <a href="../../About/About.php" class="navbar-link">About</a>
                     </li>
                     <li class="navbar-item">
-                        <a href="../../Contact/ContactUs.html" class="navbar-link">Contact</a>
+                        <a href="../../Contact/ContactUs.php" class="navbar-link">Contact</a>
                     </li>
                 </ul>
                 <!--header action-->
                 <div class="header-action">
-                    <a href="../../Registration/Registration.html" class="btn btn-primary">LogIn</a>
+                    <a href="../../Registration/Registration.php" class="btn btn-primary">LogIn</a>
                 </div>
             </nav>
 
