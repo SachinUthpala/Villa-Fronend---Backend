@@ -17,9 +17,6 @@ session_start();
 
   // Turn off all error reporting
   error_reporting(0);
-
-
-
 ?>
 
 
@@ -135,7 +132,7 @@ session_start();
           </ul>
           <!--header action-->
           <div class="header-action" style="display:<?php if($_SESSION['userMail'] != null){ echo 'none';} else { echo 'block';} ?>;">
-            <a href="./Registration/Registration.php" class="btn btn-primary">LogIn</a>
+            <a href="../Registration/Registration.php" class="btn btn-primary">LogIn</a>
           </div>
           <img src="../assets/images/k.jpg" width="50px" height="50px" style="border-radius: 100%;cursor:pointer;display: <?php if($_SESSION['userMail'] != null){ echo 'block';} else { echo 'none';} ?>;" alt="">
           <span style="cursor: pointer;padding-left:20px;font-size:27px;display: <?php if($_SESSION['userMail'] != null){ echo 'block';} else { echo 'none';} ?>;" class="material-symbols-outlined" onclick="signout()">power_settings_new</span>
@@ -204,7 +201,7 @@ session_start();
                         <div class="image-box">
                             <img src="../assets/images/contact.png" alt="" />
                         </div>
-                        <form action="#" method="post">
+                        <form action="../db.configs/ContactUs/ContactUs.php" method="post">
                             <div class="topic">Send us a message</div>
                             <div class="input-box">
                                 <input type="text" required name="name" value="<?php if($email != null) {echo $name;} ?>" />
@@ -215,7 +212,7 @@ session_start();
                                 <label>Enter your email</label>
                             </div>
                             <div class="input-box">
-                                <input type="text" required name="mag"/>
+                                <input type="text" required name="msg"/>
                                 <label>Enter your Massage</label>
                             </div>
                             <div class="input-box">
@@ -543,7 +540,18 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+  <!--session massages -->
+    <?php
+        if($_SESSION['ContactSucess'] != null){
+            echo '<script>Swal.fire({
+            title: "Sucessfully Sent!",
+            text: "Our Contact Team Will Responce Soon",
+            icon: "success"
+            });</script>';
+            $_SESSION['ContactSucess'] = null;
+        }
 
+    ?>
     <!--
       scripts for sweet alert
     -->
