@@ -330,7 +330,7 @@ body {
 }
 .status.delivered {
   padding: 2px 4px;
-  background: #8de02c;
+  background: #89ff02;
   color: var(--white);
   border-radius: 4px;
   font-size: 14px;

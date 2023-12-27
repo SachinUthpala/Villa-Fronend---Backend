@@ -1,6 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!--
+    getting data from users
+-->
+<?php
+//db connection
+require_once '../db.configs/connection.db.php';
+//starting sesstions
+session_start();
+
+$userQuery = "SELECT * FROM users";
+$userResult = $conn -> query($userQuery);
+
+
+
+?>
+
+
+<!--
+    getting data from massages
+-->
+<?php
+
+$massageQuery = "SELECT * FROM usermassages";
+$MassageResult = $conn -> query($massageQuery); 
+
+
+
+?>
+
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -123,8 +153,8 @@
 
                 <div class="card">
                     <div>
-                        <div class="numbers">20</div>
-                        <div class="cardName">Logins</div>
+                        <div class="numbers"><?php $totalUsers = $userResult -> num_rows; echo $totalUsers;?></div>
+                        <div class="cardName">Users</div>
                     </div>
 
                     <div class="iconBx">
@@ -159,76 +189,38 @@
             <div class="details">
                 <div class="recentOrders">
                     <div class="cardHeader">
-                        <h2>Recent Orders</h2>
-                        <a href="#" class="btn">View All</a>
+                        <h2>Recent Massages</h2>
                     </div>
 
                     <table>
                         <thead>
                             <tr>
-                                <td>Name</td>
-                                <td>Price</td>
-                                <td>Payment</td>
+                                <td>UserMail</td>
+                                <td>Massage</td>
+                                <td>Submited Date</td>
                                 <td>Status</td>
                             </tr>
                         </thead>
 
                         <tbody>
+
+                        <?php 
+                            while($massageRow = mysqli_fetch_assoc($MassageResult)){
+                        ?>
                             <tr>
-                                <td>Star Refrigerator</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status delivered">Delivered</span></td>
+                                <td><?php echo $massageRow['UserName']; ?></td>
+                                <td><?php echo $massageRow['Massage']; ?></td>
+                                <td><?php  echo $massageRow['SubmittedDate']; ?></td>
+                                <td><span class="status <?php if($massageRow['read'] == 0){echo 'return';}else{echo 'delivered';} ?>"><?php if($massageRow['read'] == 0){ echo "UnRead"; } else { echo "Readed"; }?></span></td>
                             </tr>
 
-                            <tr>
-                                <td>Dell Laptop</td>
-                                <td>$110</td>
-                                <td>Due</td>
-                                <td><span class="status pending">Pending</span></td>
-                            </tr>
+                            <?php
+                            }
+                            ?>
+                            
+                            
 
-                            <tr>
-                                <td>Apple Watch</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status return">Return</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Addidas Shoes</td>
-                                <td>$620</td>
-                                <td>Due</td>
-                                <td><span class="status inProgress">In Progress</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Star Refrigerator</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status delivered">Delivered</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Dell Laptop</td>
-                                <td>$110</td>
-                                <td>Due</td>
-                                <td><span class="status pending">Pending</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Apple Watch</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status return">Return</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Addidas Shoes</td>
-                                <td>$620</td>
-                                <td>Due</td>
-                                <td><span class="status inProgress">In Progress</span></td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
@@ -240,77 +232,21 @@
                     </div>
 
                     <table>
+                        <?php
+                            while($userRow = mysqli_fetch_assoc($userResult)){
+                        ?>
                         <tr>
                             <td width="60px">
-                                <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
+                                <div class="imgBx"><img src="<?php echo "../UserImg/".$userRow['Img']; ?>" alt=""></div>
                             </td>
                             <td>
-                                <h4>David <br> <span>Italy</span></h4>
+                                <h4><?php echo $userRow['name']; ?> <br> <span><?php echo $userRow['signup_date'] ?></span></h4>
                             </td>
                         </tr>
 
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>Amit <br> <span>India</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>David <br> <span>Italy</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>Amit <br> <span>India</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>David <br> <span>Italy</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>Amit <br> <span>India</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>David <br> <span>Italy</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>Amit <br> <span>India</span></h4>
-                            </td>
-                        </tr>
+                        <?php 
+                            }
+                        ?>
                     </table>
                 </div>
             </div>
@@ -468,7 +404,7 @@
                     confirmButtonText: "Yes, Switch Now!"
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        location.href = "../index.html";
+                        location.href = "../index.php";
                     }
                 });
             }

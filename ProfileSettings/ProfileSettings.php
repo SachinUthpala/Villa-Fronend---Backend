@@ -38,7 +38,7 @@ require_once '../db.configs/connection.db.php';
     <section class="container">
       <header>Profile Settings</header>
       <div class="divs">
-        <img src="./sachin.png" alt="">
+        <img src="<?php echo '../UserImg/'.$profileRow['Img']; ?>" alt="">
         <h1>: Sachin</h1>
         <hr>
       </div>
@@ -72,8 +72,33 @@ require_once '../db.configs/connection.db.php';
           </div>
         </div>
         <button type="submit" name="submit">Submit</button>
-        <button onclick="location.href='../index.php'">Cancel</button>
+        <button type="button" onclick="location.href='../index.php'">Cancel</button>
       </form>
     </section>
+
+
+
+    <!--
+      sweet alert
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!--
+      sucessfully updated massage
+    -->
+    <?php
+    
+      if($_SESSION['ProfileUpdate'] != null){
+      echo '<script>Swal.fire({
+        title: "Sucessfully Updated!",
+        text: "Sucessfull",
+        icon: "success"
+      });</script>';
+      $_SESSION['ProfileUpdate'] = null;
+     }
+
+
+    ?>
   </body>
 </html>
