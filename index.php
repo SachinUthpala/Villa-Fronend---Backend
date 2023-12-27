@@ -39,6 +39,7 @@ require_once './db.configs/connection.db.php';
         $isAdmin = true;
       }
     }
+
   }
 ?>
 
@@ -145,7 +146,7 @@ require_once './db.configs/connection.db.php';
           <div class="header-action" style="display:<?php if($_SESSION['userMail'] != null){ echo 'none';} else { echo 'block';} ?>;">
             <a href="./Registration/Registration.php" class="btn btn-primary">LogIn</a>
           </div>
-          <img src="./assets/images/k.jpg" width="50px" height="50px" onclick="location.href='./ProfileSettings/ProfileSettings.php'" style="border-radius: 100%;cursor:pointer;display: <?php if($_SESSION['userMail'] != null){ echo 'block';} else { echo 'none';} ?>;" alt="">
+          <img src="<?php if($_SESSION['userMail'] != null){echo "./userImg/".$adminRow['Img'];} else { echo "./assets/images/k.jpg"; } ?>" width="50px" height="50px" onclick="location.href='./ProfileSettings/ProfileSettings.php'" style="border-radius: 100%;cursor:pointer;display: <?php if($_SESSION['userMail'] != null){ echo 'block';} else { echo 'none';} ?>;" alt="">
           <span style="cursor: pointer;padding-left:20px;font-size:27px;display: <?php if($_SESSION['userMail'] != null){ echo 'block';} else { echo 'none';} ?>;" class="material-symbols-outlined" onclick="signout()">power_settings_new</span>
         </nav>
 
